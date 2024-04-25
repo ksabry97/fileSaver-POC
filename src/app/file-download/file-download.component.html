@@ -1,3 +1,12 @@
 <p>file-download works!</p>
 
-<button (click)="downloadFile('mycv.pdf')">download here</button>
+<button
+  (click)="
+    downloadFile(
+      'https://s3.dinarcrm.com/sortech/b9bba35e-15ed-4537-9237-fb0cdf8df733/Chat/Whatsapp/7bf0d394-c380-43f4-b992-0fa71c86c060/e1ef2f54-0077-4f8f-a82b-e76840cd416c.pdf',
+      'mycv.pdf'
+    )
+  "
+>
+  download here
+</button>

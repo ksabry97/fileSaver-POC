@@ -1,17 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { saveAs } from 'file-saver';
 @Injectable({
   providedIn: 'root',
 })
 export class DownloadServiceService {
   constructor(private http: HttpClient) {}
 
-  // download file
-
-  downloadFile() {
-    let url =
-      'https://s3.dinarcrm.com/sortech/b9bba35e-15ed-4537-9237-fb0cdf8df733/Chat/Whatsapp/7bf0d394-c380-43f4-b992-0fa71c86c060/e1ef2f54-0077-4f8f-a82b-e76840cd416c.pdf';
+  // get File from minio
+  getFile(url: string) {
     return this.http.get(url, { responseType: 'blob' });
+  }
+
+  // download file to the client side
+
+  downloadFile(url: string, filName: string) {
+    this.getFile(url).subscribe({
+      next: (data: Blob) => {
+        saveAs(data, filName);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {},
+    });
   }
 }

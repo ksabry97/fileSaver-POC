@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { saveAs } from 'file-saver';
+
 import { DownloadServiceService } from '../services/download-service.service';
 
 @Component({
@@ -16,16 +16,7 @@ export class FileDownloadComponent implements OnInit {
   ngOnInit(): void {}
 
   // function to download file by file saver
-
-  downloadFile(filName: string) {
-    this.downloadServ.downloadFile().subscribe({
-      next: (data: Blob) => {
-        saveAs(data, filName);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {},
-    });
+  downloadFile(url: string, filName: string) {
+    this.downloadServ.downloadFile(url, filName);
   }
 }
